@@ -1,3 +1,37 @@
+# Robots.txt for Art of Devil Photography Website
 # https://www.robotstxt.org/robotstxt.html
+
 User-agent: *
-Disallow:
+Allow: /
+
+# Crawl-delay for all bots (optional, helps with server load)
+Crawl-delay: 1
+
+# Sitemap location (update with your actual domain)
+Sitemap: https://artofdevil.com/sitemap.xml
+
+# Allow common search engine bots
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot  
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+# Disallow certain file types if needed (uncomment if applicable)
+# Disallow: *.pdf$
+# Disallow: *.doc$
+# Disallow: *.docx$
+
+# Block AI training bots (optional - uncomment if you want to prevent AI training)
+# User-agent: CCBot
+# Disallow: /
+# User-agent: ChatGPT-User
+# Disallow: /
+# User-agent: GPTBot
+# Disallow: /

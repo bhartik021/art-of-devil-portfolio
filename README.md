@@ -1,70 +1,190 @@
-# Getting Started with Create React App
+# Art of Devil - Photography & Video Editing Portfolio
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern, responsive portfolio website built with React.js and Bootstrap for photographers and video editors.
 
-## Available Scripts
+## 🚀 Features
 
-In the project directory, you can run:
+- **Modern UI Design**: Clean, professional design with smooth animations
+- **Responsive Layout**: Fully responsive design that works on all devices
+- **Component-Based Architecture**: Organized React components for easy maintenance
+- **Portfolio Gallery**: Separate sections for photography and videography work
+- **Interactive Navigation**: Smooth scrolling navigation with hover effects
+- **Contact Form**: Functional contact form with validation
+- **Social Media Integration**: Links to social media profiles
+- **SEO Optimized**: Meta tags and Open Graph tags for better search visibility
+- **Fast Performance**: Optimized images and code for fast loading
 
-### `npm start`
+## 🛠️ Technologies Used
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **React.js** - Frontend JavaScript library
+- **Bootstrap 5** - CSS framework for responsive design
+- **React Bootstrap** - Bootstrap components for React
+- **Bootstrap Icons** - Icon library
+- **AOS (Animate On Scroll)** - Animation library
+- **Google Fonts** - Inter font family
+- **CSS3** - Custom styles and animations
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 📂 Project Structure
 
-### `npm test`
+```
+src/
+├── components/
+│   ├── Navigation.js    # Navigation bar component
+│   ├── Hero.js          # Hero section component
+│   ├── Gallery.js       # Portfolio gallery component
+│   ├── About.js         # About section component
+│   ├── Contact.js       # Contact form component
+│   └── Footer.js        # Footer component
+├── App.js               # Main App component
+├── App.css              # Custom styles
+└── index.js             # Entry point
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## 🎨 Sections
 
-### `npm run build`
+### Navigation
+- Fixed navigation bar with smooth scrolling
+- Responsive hamburger menu for mobile devices
+- Brand logo with camera icon
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Hero Section
+- Eye-catching banner with background image
+- Call-to-action buttons
+- Animated text with fade-in effects
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Gallery
+- Tabbed interface for Photography and Videography
+- Grid layout with hover effects
+- Sample portfolio items with categories
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### About
+- Professional bio and experience
+- Skills progress bars
+- Services offered with icons
+- Statistics counter
 
-### `npm run eject`
+### Contact
+- Contact form with validation
+- Contact information display
+- Social media links
+- Working hours information
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Footer
+- Quick links navigation
+- Services list
+- Contact information
+- Social media links
+- Copyright information
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🚀 Getting Started
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Prerequisites
+- Node.js (version 14 or higher)
+- npm or yarn package manager
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Installation
 
-## Learn More
+1. Clone the repository
+```bash
+git clone <repository-url>
+cd art-of-devil-portfolio
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+2. Install dependencies
+```bash
+npm install
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+3. Start the development server
+```bash
+npm start
+```
 
-### Code Splitting
+4. Open your browser and visit `http://localhost:3000`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Building for Production
 
-### Analyzing the Bundle Size
+```bash
+npm run build
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+This creates a `build` folder with optimized production files.
 
-### Making a Progressive Web App
+## 📱 Responsive Design
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+The website is fully responsive and optimized for:
+- Desktop (1200px+)
+- Tablet (768px - 1199px)
+- Mobile (320px - 767px)
 
-### Advanced Configuration
+## 🎨 Customization
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Colors
+The color scheme can be customized by modifying the CSS variables in `src/App.css`:
 
-### Deployment
+```css
+:root {
+  --primary-color: #ffc107;    /* Yellow/Gold */
+  --secondary-color: #212529;  /* Dark Gray */
+  --accent-color: #6c757d;     /* Gray */
+  --light-color: #f8f9fa;      /* Light Gray */
+  --dark-color: #343a40;       /* Dark */
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+### Content
+- Update portfolio images in the `Gallery.js` component
+- Modify personal information in the `About.js` component
+- Update contact information in `Contact.js` and `Footer.js` components
+- Change the brand name throughout the components
 
-### `npm run build` fails to minify
+### Images
+Replace the placeholder images with your actual portfolio images:
+- Update image URLs in `Gallery.js`
+- Replace hero background image in `App.css`
+- Add your profile image in `About.js`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 📧 Contact Form Integration
+
+The contact form is ready to be integrated with backend services like:
+- EmailJS
+- Formspree
+- Netlify Forms
+- Custom backend API
+
+## 📈 Performance Features
+
+- Lazy loading for images
+- Optimized CSS animations
+- Compressed image formats
+- Minimal JavaScript bundle size
+
+## 🔧 Available Scripts
+
+- `npm start` - Runs the development server
+- `npm run build` - Creates production build
+- `npm test` - Runs test suite
+- `npm run eject` - Ejects from Create React App
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## 🤝 Contributing
+
+Contributions are welcome! Feel free to:
+1. Fork the project
+2. Create a feature branch
+3. Commit your changes
+4. Push to the branch
+5. Open a Pull Request
+
+## 📞 Support
+
+For support and questions, please contact:
+- Email: contact@artofdevil.com
+- Website: [Art of Devil Portfolio](https://artofdevil.com)
+
+---
+
+Built with ❤️ by Art of Devil

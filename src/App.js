@@ -1,24 +1,41 @@
-import logo from './logo.svg';
+import React from 'react';
+import { HelmetProvider } from 'react-helmet-async';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import 'aos/dist/aos.css';
+import AOS from 'aos';
+import { useEffect } from 'react';
+
+// Import components
+import SEOHead from './components/SEOHead';
+import Hero from './components/Hero';
+import Gallery from './components/Gallery';
+import About from './components/About';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
+
 import './App.css';
 
 function App() {
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+      offset: 100
+    });
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <HelmetProvider>
+      <div className="App">
+        <SEOHead />
+        <Hero />
+        <Gallery />
+        <About />
+        <Contact />
+        <Footer />
+      </div>
+    </HelmetProvider>
   );
 }
 

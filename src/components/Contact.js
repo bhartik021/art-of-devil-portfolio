@@ -16,8 +16,8 @@ const Contact = () => {
   // Contact information
   const contactInfo = {
     email: 'Vk4508429@gmail.com',
-    phone: '+1234567890', // Replace with your actual phone number
-    whatsapp: '+1234567890', // Replace with your WhatsApp number
+    phone: '+918107811960', // Replace with your actual phone number
+    whatsapp: '+918107811960', // Replace with your WhatsApp number
     instagram: 'https://www.instagram.com/art_of_devil?igsh=dG8wZnA1N3pjcjE4',
     youtube: 'https://youtube.com/@artofdevil28?si=wCtLzSoIOoDo7pZA'
   };
@@ -33,8 +33,37 @@ const Contact = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Create WhatsApp message from form data
-    const whatsappMessage = `Hi! I'm ${formData.name}.
+    try {
+      // Using Formspree for reliable form submission
+      const response = await fetch('https://formspree.io/f/your-form-id', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          _replyto: formData.email,
+        }),
+      });
+
+      if (response.ok) {
+        setAlertType('success');
+        setAlertMessage('Thank you! Your message has been sent successfully. I\'ll get back to you soon!');
+        setShowAlert(true);
+        
+        // Reset form
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        throw new Error('Form submission failed');
+      }
+      
+    } catch (error) {
+      console.error('Form submission error:', error);
+      // Fallback to WhatsApp if form fails
+      const whatsappMessage = `Hi! I'm ${formData.name}.
 
 📧 Email: ${formData.email}
 📝 Subject: ${formData.subject}
@@ -44,21 +73,17 @@ ${formData.message}
 
 Looking forward to hearing from you!`;
 
-    // Open WhatsApp with the message
-    const whatsappUrl = `https://wa.me/${contactInfo.whatsapp.replace('+', '')}?text=${encodeURIComponent(whatsappMessage)}`;
-    window.open(whatsappUrl, '_blank');
-
-    // Show success message
-    setAlertType('success');
-    setAlertMessage('Opening WhatsApp with your message. Send it to start our conversation!');
-    setShowAlert(true);
-    
-    // Reset form
-    setFormData({ name: '', email: '', subject: '', message: '' });
-    setIsLoading(false);
-    
-    // Hide alert after 5 seconds
-    setTimeout(() => setShowAlert(false), 5000);
+      const whatsappUrl = `https://wa.me/${contactInfo.whatsapp.replace('+', '')}?text=${encodeURIComponent(whatsappMessage)}`;
+      window.open(whatsappUrl, '_blank');
+      
+      setAlertType('success');
+      setAlertMessage('Form service unavailable. Opening WhatsApp as backup - please send the message there!');
+      setShowAlert(true);
+    } finally {
+      setIsLoading(false);
+      // Hide alert after 5 seconds
+      setTimeout(() => setShowAlert(false), 5000);
+    }
   };
 
   // Quick contact method
@@ -116,10 +141,10 @@ Looking forward to hearing from you!`;
             <div className="contact-form-container" data-aos="fade-right">
               <div className="form-header">
                 <h3 className="form-title">
-                  <i className="bi bi-whatsapp" style={{ color: '#25D366', marginRight: '10px' }}></i>
-                  Send WhatsApp Message
+                  <i className="bi bi-chat-dots-fill" style={{ color: '', marginRight: '10px' }}></i>
+                  Send Message
                 </h3>
-                <p className="form-subtitle">Fill the form and we'll connect on WhatsApp instantly</p>
+                <p className="form-subtitle">Fill out your details and I'll get back to you soon. WhatsApp backup available if needed!</p>
               </div>
               
               {showAlert && (
@@ -206,11 +231,11 @@ Looking forward to hearing from you!`;
                     placeholder="Tell me about your project, what you need help with, and any specific requirements..."
                   />
                 </div>
-                <button type="submit" className="submit-btn whatsapp-submit-btn" disabled={isLoading}>
+                <button type="submit" className="submit-btn contact-submit-btn" disabled={isLoading}>
                   <span className="btn-text">
-                    {isLoading ? 'Opening WhatsApp...' : 'Send via WhatsApp'}
+                    {isLoading ? 'Sending Message...' : 'Send Message'}
                   </span>
-                  <i className={`bi ${isLoading ? 'bi-hourglass-split' : 'bi-whatsapp'} btn-icon`}></i>
+                  <i className={`bi ${isLoading ? 'bi-hourglass-split' : 'bi-send-fill'} btn-icon`}></i>
                   <div className="btn-glow"></div>
                 </button>
               </Form>

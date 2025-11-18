@@ -4733,29 +4733,29 @@ h1, .display-1, .display-2, .display-3, .display-4 {
   left: 100%;
 }
 
-/* WhatsApp Submit Button */
-.whatsapp-submit-btn {
-  background: linear-gradient(135deg, #25D366, #128C7E) !important;
+/* Contact Submit Button */
+.contact-submit-btn {
+  background: linear-gradient(135deg, var(--primary-color), #ffcd39) !important;
   border: none !important;
-  color: white !important;
-  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.3) !important;
+  color: #000000 !important;
+  box-shadow: 0 8px 25px rgba(255, 193, 7, 0.3) !important;
 }
 
-.whatsapp-submit-btn:hover {
-  background: linear-gradient(135deg, #128C7E, #25D366) !important;
+.contact-submit-btn:hover {
+  background: linear-gradient(135deg, #ffcd39, var(--primary-color)) !important;
   transform: translateY(-3px) !important;
-  box-shadow: 0 15px 35px rgba(37, 211, 102, 0.5) !important;
-  color: white !important;
+  box-shadow: 0 15px 35px rgba(255, 193, 7, 0.5) !important;
+  color: #000000 !important;
 }
 
-.whatsapp-submit-btn:disabled {
-  background: linear-gradient(135deg, #25D366, #128C7E) !important;
+.contact-submit-btn:disabled {
+  background: linear-gradient(135deg, var(--primary-color), #ffcd39) !important;
   opacity: 0.8 !important;
-  color: white !important;
+  color: #000000 !important;
 }
 
-.whatsapp-submit-btn .btn-icon {
-  color: white !important;
+.contact-submit-btn .btn-icon {
+  color: #000000 !important;
 }
 
 /* WhatsApp Info Section */

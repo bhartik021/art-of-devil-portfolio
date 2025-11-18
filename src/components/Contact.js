@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 
 const Contact = () => {
@@ -10,25 +10,17 @@ const Contact = () => {
   });
   const [showAlert, setShowAlert] = useState(false);
   const [alertType, setAlertType] = useState('success'); // 'success' or 'error'
+  const [alertMessage, setAlertMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  // Email address where all contact form messages will be delivered
-  const YOUR_EMAIL = 'Vk4508429@gmail.com';
-
-  // Check for success parameter in URL (when returning from Formsubmit)
-  useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('success') === 'true') {
-      setAlertType('success');
-      setShowAlert(true);
-      
-      // Clean up URL
-      window.history.replaceState({}, document.title, window.location.pathname);
-      
-      // Hide alert after 5 seconds
-      setTimeout(() => setShowAlert(false), 5000);
-    }
-  }, []);
+  // Contact information
+  const contactInfo = {
+    email: 'Vk4508429@gmail.com',
+    phone: '+1234567890', // Replace with your actual phone number
+    whatsapp: '+1234567890', // Replace with your WhatsApp number
+    instagram: 'https://www.instagram.com/art_of_devil?igsh=dG8wZnA1N3pjcjE4',
+    youtube: 'https://youtube.com/@artofdevil28?si=wCtLzSoIOoDo7pZA'
+  };
 
   const handleChange = (e) => {
     setFormData({
@@ -37,10 +29,43 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = (e) => {
-    // Show loading state while form submits
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     setIsLoading(true);
-    // Form will redirect to Formsubmit, then return with success parameter
+
+    // Create WhatsApp message from form data
+    const whatsappMessage = `Hi! I'm ${formData.name}.
+
+📧 Email: ${formData.email}
+📝 Subject: ${formData.subject}
+
+Message:
+${formData.message}
+
+Looking forward to hearing from you!`;
+
+    // Open WhatsApp with the message
+    const whatsappUrl = `https://wa.me/${contactInfo.whatsapp.replace('+', '')}?text=${encodeURIComponent(whatsappMessage)}`;
+    window.open(whatsappUrl, '_blank');
+
+    // Show success message
+    setAlertType('success');
+    setAlertMessage('Opening WhatsApp with your message. Send it to start our conversation!');
+    setShowAlert(true);
+    
+    // Reset form
+    setFormData({ name: '', email: '', subject: '', message: '' });
+    setIsLoading(false);
+    
+    // Hide alert after 5 seconds
+    setTimeout(() => setShowAlert(false), 5000);
+  };
+
+  // Quick contact method
+  const openWhatsApp = () => {
+    const message = `Hi, I'm interested in your video editing services. Can we discuss my project?`;
+    const whatsappUrl = `https://wa.me/${contactInfo.whatsapp.replace('+', '')}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
   };
 
 
@@ -90,8 +115,11 @@ const Contact = () => {
           <Col lg={7} className="mb-5 mb-lg-0">
             <div className="contact-form-container" data-aos="fade-right">
               <div className="form-header">
-                <h3 className="form-title">Send a Message</h3>
-                <p className="form-subtitle">Tell me about your project</p>
+                <h3 className="form-title">
+                  <i className="bi bi-whatsapp" style={{ color: '#25D366', marginRight: '10px' }}></i>
+                  Send WhatsApp Message
+                </h3>
+                <p className="form-subtitle">Fill the form and we'll connect on WhatsApp instantly</p>
               </div>
               
               {showAlert && (
@@ -101,9 +129,7 @@ const Contact = () => {
                     <div>
                       <strong>{alertType === 'success' ? 'Message sent!' : 'Error occurred!'}</strong>
                       <p>
-                        {alertType === 'success' 
-                          ? 'Thanks for reaching out! I\'ll get back to you soon.' 
-                          : 'Sorry, there was a problem sending your message. Please try again later or contact me directly.'}
+                        {alertMessage}
                       </p>
                     </div>
                   </div>
@@ -111,15 +137,9 @@ const Contact = () => {
               )}
 
               <Form 
-                action={`https://formsubmit.co/${YOUR_EMAIL}`}
-                method="POST"
                 onSubmit={handleSubmit} 
                 className="contact-form"
               >
-                {/* Formsubmit configuration - hidden fields */}
-                <input type="hidden" name="_captcha" value="false" />
-                <input type="hidden" name="_template" value="table" />
-                <input type="hidden" name="_next" value={window.location.origin + window.location.pathname + "?success=true"} />
                 <Row>
                   <Col md={6} className="mb-4">
                     <div className="form-group">
@@ -186,14 +206,15 @@ const Contact = () => {
                     placeholder="Tell me about your project, what you need help with, and any specific requirements..."
                   />
                 </div>
-                <button type="submit" className="submit-btn" disabled={isLoading}>
+                <button type="submit" className="submit-btn whatsapp-submit-btn" disabled={isLoading}>
                   <span className="btn-text">
-                    {isLoading ? 'Sending...' : 'Send Message'}
+                    {isLoading ? 'Opening WhatsApp...' : 'Send via WhatsApp'}
                   </span>
-                  <i className={`bi ${isLoading ? 'bi-hourglass-split' : 'bi-arrow-right'} btn-icon`}></i>
+                  <i className={`bi ${isLoading ? 'bi-hourglass-split' : 'bi-whatsapp'} btn-icon`}></i>
                   <div className="btn-glow"></div>
                 </button>
               </Form>
+
             </div>
           </Col>
 
@@ -201,8 +222,28 @@ const Contact = () => {
           <Col lg={5}>
             <div className="contact-info-container" data-aos="fade-left">
               <div className="info-header">
-                <h3 className="info-title">Connect With Me</h3>
-                <p className="info-subtitle">Find me on social media</p>
+                <h3 className="info-title">Let's Connect</h3>
+                <p className="info-subtitle">WhatsApp for instant communication, or follow my work on social media</p>
+              </div>
+
+              {/* WhatsApp Info */}
+              <div className="whatsapp-info-section" data-aos="fade-up" data-aos-delay="200">
+                <div className="whatsapp-info-card">
+                  <div className="whatsapp-icon">
+                    <i className="bi bi-whatsapp"></i>
+                  </div>
+                  <div className="whatsapp-content">
+                    <h4>Preferred Contact Method</h4>
+                    <p>WhatsApp for instant communication</p>
+                    <button 
+                      onClick={openWhatsApp}
+                      className="whatsapp-direct-btn"
+                    >
+                      <i className="bi bi-whatsapp"></i>
+                      Start WhatsApp Chat
+                    </button>
+                  </div>
+                </div>
               </div>
 
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form } from 'react-bootstrap';
+import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -12,6 +13,11 @@ const Contact = () => {
   const [alertType, setAlertType] = useState('success'); // 'success' or 'error'
   const [alertMessage, setAlertMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  // EmailJS Configuration - Replace with your actual EmailJS credentials
+  const EMAILJS_SERVICE_ID = 'your_service_id';
+  const EMAILJS_TEMPLATE_ID = 'your_template_id';  
+  const EMAILJS_PUBLIC_KEY = 'your_public_key';
 
   // Contact information
   const contactInfo = {
@@ -33,9 +39,12 @@ const Contact = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    // Create professional email
-    const emailSubject = `Portfolio Inquiry: ${formData.subject}`;
-    const emailBody = `Hello,
+    try {
+      // Check if EmailJS is configured
+      if (EMAILJS_SERVICE_ID === 'your_service_id' || EMAILJS_TEMPLATE_ID === 'your_template_id' || EMAILJS_PUBLIC_KEY === 'your_public_key') {
+        // Fallback to mailto if EmailJS not configured
+        const emailSubject = `Portfolio Inquiry: ${formData.subject}`;
+        const emailBody = `Hello,
 
 I'm interested in your video editing services.
 
@@ -52,23 +61,60 @@ Please get back to me at your earliest convenience.
 Best regards,
 ${formData.name}`;
 
-    // Create mailto link
-    const mailtoLink = `mailto:${contactInfo.email}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-    
-    // Open email client
-    window.open(mailtoLink);
+        const mailtoLink = `mailto:${contactInfo.email}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+        window.open(mailtoLink);
+        
+        setAlertType('success');
+        setAlertMessage('Opening your email client with the message ready to send. Please click "Send" in your email app!');
+        setShowAlert(true);
+      } else {
+        // Use EmailJS for professional email sending
+        await emailjs.send(
+          EMAILJS_SERVICE_ID,
+          EMAILJS_TEMPLATE_ID,
+          {
+            from_name: formData.name,
+            from_email: formData.email,
+            subject: formData.subject,
+            message: formData.message,
+            to_email: contactInfo.email,
+          },
+          EMAILJS_PUBLIC_KEY
+        );
 
-    // Show success message
-    setAlertType('success');
-    setAlertMessage('Opening your email client with the message ready to send. Please click "Send" in your email app!');
-    setShowAlert(true);
-    
-    // Reset form
-    setFormData({ name: '', email: '', subject: '', message: '' });
-    setIsLoading(false);
-    
-    // Hide alert after 8 seconds (longer for email)
-    setTimeout(() => setShowAlert(false), 8000);
+        setAlertType('success');
+        setAlertMessage('Thank you! Your message has been sent successfully. I\'ll get back to you soon!');
+        setShowAlert(true);
+      }
+      
+      // Reset form on success
+      setFormData({ name: '', email: '', subject: '', message: '' });
+      
+    } catch (error) {
+      console.error('Email sending failed:', error);
+      
+      // Fallback to WhatsApp if email fails
+      const whatsappMessage = `Hi! I'm ${formData.name}.
+
+📧 Email: ${formData.email}
+📝 Subject: ${formData.subject}
+
+Message:
+${formData.message}
+
+Looking forward to hearing from you!`;
+
+      const whatsappUrl = `https://wa.me/${contactInfo.whatsapp.replace('+', '')}?text=${encodeURIComponent(whatsappMessage)}`;
+      window.open(whatsappUrl, '_blank');
+      
+      setAlertType('success');
+      setAlertMessage('Email service unavailable. Opening WhatsApp as backup - please send the message there!');
+      setShowAlert(true);
+    } finally {
+      setIsLoading(false);
+      // Hide alert after 5 seconds
+      setTimeout(() => setShowAlert(false), 5000);
+    }
   };
 
   // Quick contact method
@@ -127,9 +173,9 @@ ${formData.name}`;
               <div className="form-header">
                 <h3 className="form-title">
                   <i className="bi bi-envelope-fill" style={{ color: '#ffc107', marginRight: '10px' }}></i>
-                  Send Email Message
+                  Send Message
                 </h3>
-                <p className="form-subtitle">Fill out the form and your email client will open with the message ready to send</p>
+                <p className="form-subtitle">Professional email service - your message will be delivered directly to my inbox</p>
               </div>
               
               {showAlert && (
@@ -218,9 +264,9 @@ ${formData.name}`;
                 </div>
                 <button type="submit" className="submit-btn contact-submit-btn" disabled={isLoading}>
                   <span className="btn-text">
-                    {isLoading ? 'Opening Email...' : 'Send via Email'}
+                    {isLoading ? 'Sending Message...' : 'Send Message'}
                   </span>
-                  <i className={`bi ${isLoading ? 'bi-hourglass-split' : 'bi-envelope-fill'} btn-icon`}></i>
+                  <i className={`bi ${isLoading ? 'bi-hourglass-split' : 'bi-send-fill'} btn-icon`}></i>
                   <div className="btn-glow"></div>
                 </button>
               </Form>

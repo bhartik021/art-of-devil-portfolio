@@ -11,6 +11,7 @@ import SEOHead from './components/SEOHead';
 import Hero from './components/Hero';
 import Gallery from './components/Gallery';
 import About from './components/About';
+import Tools from './components/Tools';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
@@ -32,6 +33,7 @@ function App() {
         <Hero />
         <Gallery />
         <About />
+        <Tools />
         <Contact />
         <Footer />
       </div>

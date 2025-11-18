@@ -10,35 +10,15 @@ const About = () => {
   }, []);
 
   const skills = [
-    { name: 'Creative Photography', percentage: 95, icon: 'bi-camera-fill' },
     { name: 'Cinematic Editing', percentage: 92, icon: 'bi-film' },
     { name: 'Color Grading', percentage: 88, icon: 'bi-palette-fill' },
     { name: 'Motion Graphics', percentage: 85, icon: 'bi-magic' },
     { name: 'Photoshop Mastery', percentage: 96, icon: 'bi-brush-fill' },
     { name: 'Premiere Wizardry', percentage: 90, icon: 'bi-play-circle-fill' },
     { name: 'After Effects', percentage: 87, icon: 'bi-lightning-fill' },
-    { name: 'Lightroom Alchemy', percentage: 94, icon: 'bi-sun-fill' }
   ];
 
   const services = [
-    {
-      icon: 'bi-person-fill',
-      title: 'Portrait Photography',
-      description: 'Capturing the essence of beauty, revealing the unique personality of every individual through artistic imagery',
-      category: 'Photography'
-    },
-    {
-      icon: 'bi-heart-fill',
-      title: 'Eternal Vows',
-      description: 'Wedding photography that transcends tradition, creating cinematic love stories with artistic lighting',
-      category: 'Wedding'
-    },
-    {
-      icon: 'bi-camera-reels-fill',
-      title: 'Cinematic Videos',
-      description: 'Video production that blurs reality and dreams, crafting visual narratives from another dimension',
-      category: 'Video'
-    },
     {
       icon: 'bi-scissors',
       title: 'Video Editing',
@@ -122,7 +102,7 @@ const About = () => {
               <div className="content-section">
                 <h3 className="section-title">The Vision</h3>
                 <p className="content-text">
-                  With over 8 years of experience pushing the boundaries of visual storytelling, 
+                  With over 3 years of experience pushing the boundaries of visual storytelling, 
                   I specialize in crafting beautiful, emotional narratives that reveal the hidden 
                   beauty within every frame. My art transcends the ordinary, capturing hearts and emotions 
                   in ways that defy conventional photography.
@@ -151,7 +131,7 @@ const About = () => {
                   <div className="stat-description">Creative realms explored</div>
                 </div>
                 <div className="stat-card" data-aos="fade-up" data-aos-delay="800">
-                  <div className="stat-number">8+</div>
+                  <div className="stat-number">3+</div>
                   <div className="stat-label">Years</div>
                   <div className="stat-description">Mastering the art of photography</div>
                 </div>
@@ -170,7 +150,7 @@ const About = () => {
           </Col>
           
           <Col lg={6}>
-            {skills.slice(0, 4).map((skill, index) => (
+            {skills.slice(0, 3).map((skill, index) => (
               <div key={skill.name} className="skill-item" data-aos="fade-right" data-aos-delay={index * 100}>
                 <div className="skill-header">
                   <div className="skill-info">
@@ -193,7 +173,7 @@ const About = () => {
           </Col>
 
           <Col lg={6}>
-            {skills.slice(4).map((skill, index) => (
+            {skills.slice(3).map((skill, index) => (
               <div key={skill.name} className="skill-item" data-aos="fade-left" data-aos-delay={index * 100}>
                 <div className="skill-header">
                   <div className="skill-info">

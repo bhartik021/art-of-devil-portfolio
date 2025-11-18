@@ -12,9 +12,6 @@ const Footer = () => {
   ];
 
   const services = [
-    { name: 'Portrait Photography', href: '#photography', icon: 'bi-person-fill' },
-    { name: 'Eternal Vows', href: '#photography', icon: 'bi-heart-fill' },
-    { name: 'Event Photography', href: '#photography', icon: 'bi-calendar-event-fill' },
     { name: 'Video Editing', href: '#videography', icon: 'bi-scissors' },
     { name: 'Color Grading', href: '#videography', icon: 'bi-palette-fill' },
     { name: 'Visual Effects', href: '#videography', icon: 'bi-magic' }

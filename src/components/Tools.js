@@ -1,35 +1,34 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import { SiAdobepremierepro, SiAdobephotoshop, SiAdobeaftereffects } from 'react-icons/si';
 
 const Tools = () => {
   const tools = [
     {
       name: 'Adobe Premiere Pro',
-      icon: SiAdobepremierepro,
+      shortName: 'Pr',
       description: 'Professional video editing and post-production workflows',
       color: '#9999FF',
+      bgColor: 'linear-gradient(135deg, #9999FF 0%, #B8B8FF 100%)',
       category: 'Video Editing',
-      features: ['Timeline Editing', 'Color Correction', 'Audio Mixing', 'Export Optimization'],
-      version: '2024'
+      features: ['Timeline Editing', 'Color Correction', 'Audio Mixing', 'Export Optimization']
     },
     {
       name: 'Adobe Photoshop',
-      icon: SiAdobephotoshop,
+      shortName: 'Ps',
       description: 'Advanced photo manipulation and digital art creation',
       color: '#31A8FF',
+      bgColor: 'linear-gradient(135deg, #31A8FF 0%, #7CC7FF 100%)',
       category: 'Photo Editing',
-      features: ['Photo Retouching', 'Compositing', 'Digital Painting', 'Typography Design'],
-      version: '2024'
+      features: ['Photo Retouching', 'Compositing', 'Digital Painting', 'Typography Design']
     },
     {
       name: 'Adobe After Effects',
-      icon: SiAdobeaftereffects,
+      shortName: 'Ae',
       description: 'Motion graphics, visual effects, and cinematic compositions',
       color: '#D291FF',
+      bgColor: 'linear-gradient(135deg, #D291FF 0%, #9A6AFF 100%)',
       category: 'Visual Effects',
-      features: ['Motion Graphics', 'Visual Effects', '3D Compositions', 'Animation'],
-      version: '2024'
+      features: ['Motion Graphics', 'Visual Effects', '3D Compositions', 'Animation']
     }
   ];
 
@@ -83,14 +82,17 @@ const Tools = () => {
                 <div className="tool-header">
                   <div className="tool-icon-container">
                     <div 
-                      className="tool-icon-wrapper"
-                      style={{ '--tool-color': tool.color }}
+                      className="adobe-logo-authentic"
+                      style={{ 
+                        '--tool-color': tool.color,
+                        background: tool.bgColor
+                      }}
                     >
-                      <tool.icon className="tool-icon-original" />
+                      <span className="adobe-letters">{tool.shortName}</span>
+                      <div className="adobe-shine-overlay"></div>
                       <div className="tool-glow"></div>
                     </div>
                     <div className="adobe-product-name">{tool.name}</div>
-                    <div className="adobe-version">CC {tool.version}</div>
                   </div>
                   <div className="tool-category">{tool.category}</div>
                 </div>

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Container, Row, Col, Form } from 'react-bootstrap';
-import emailjs from '@emailjs/browser';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -14,10 +13,8 @@ const Contact = () => {
   const [alertMessage, setAlertMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  // EmailJS Configuration - Replace with your actual EmailJS credentials
-  const EMAILJS_SERVICE_ID = 'your_service_id';
-  const EMAILJS_TEMPLATE_ID = 'your_template_id';  
-  const EMAILJS_PUBLIC_KEY = 'your_public_key';
+  // Formspree configuration - real email service
+  const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xanydvwd'; // This will be your form endpoint
 
   // Contact information
   const contactInfo = {
@@ -40,76 +37,36 @@ const Contact = () => {
     setIsLoading(true);
 
     try {
-      // Check if EmailJS is configured
-      if (EMAILJS_SERVICE_ID === 'your_service_id' || EMAILJS_TEMPLATE_ID === 'your_template_id' || EMAILJS_PUBLIC_KEY === 'your_public_key') {
-        // Fallback to mailto if EmailJS not configured
-        const emailSubject = `Portfolio Inquiry: ${formData.subject}`;
-        const emailBody = `Hello,
+      // Send email using Formspree - real email service
+      const response = await fetch(FORMSPREE_ENDPOINT, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          _replyto: formData.email,
+          _subject: `Portfolio Inquiry: ${formData.subject}`,
+        }),
+      });
 
-I'm interested in your video editing services.
-
-CONTACT DETAILS:
-Name: ${formData.name}
-Email: ${formData.email}
-Subject: ${formData.subject}
-
-PROJECT DETAILS:
-${formData.message}
-
-Please get back to me at your earliest convenience.
-
-Best regards,
-${formData.name}`;
-
-        const mailtoLink = `mailto:${contactInfo.email}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-        window.open(mailtoLink);
+      if (response.ok) {
+        setAlertType('success');
+        setAlertMessage('Email has been sent!');
+        setShowAlert(true);
         
-        setAlertType('success');
-        setAlertMessage('Opening your email client with the message ready to send. Please click "Send" in your email app!');
-        setShowAlert(true);
+        // Reset form on success
+        setFormData({ name: '', email: '', subject: '', message: '' });
       } else {
-        // Use EmailJS for professional email sending
-        await emailjs.send(
-          EMAILJS_SERVICE_ID,
-          EMAILJS_TEMPLATE_ID,
-          {
-            from_name: formData.name,
-            from_email: formData.email,
-            subject: formData.subject,
-            message: formData.message,
-            to_email: contactInfo.email,
-          },
-          EMAILJS_PUBLIC_KEY
-        );
-
-        setAlertType('success');
-        setAlertMessage('Thank you! Your message has been sent successfully. I\'ll get back to you soon!');
-        setShowAlert(true);
+        throw new Error('Failed to send email');
       }
-      
-      // Reset form on success
-      setFormData({ name: '', email: '', subject: '', message: '' });
       
     } catch (error) {
       console.error('Email sending failed:', error);
-      
-      // Fallback to WhatsApp if email fails
-      const whatsappMessage = `Hi! I'm ${formData.name}.
-
-📧 Email: ${formData.email}
-📝 Subject: ${formData.subject}
-
-Message:
-${formData.message}
-
-Looking forward to hearing from you!`;
-
-      const whatsappUrl = `https://wa.me/${contactInfo.whatsapp.replace('+', '')}?text=${encodeURIComponent(whatsappMessage)}`;
-      window.open(whatsappUrl, '_blank');
-      
-      setAlertType('success');
-      setAlertMessage('Email service unavailable. Opening WhatsApp as backup - please send the message there!');
-      setShowAlert(true);
+      // No error message shown - fail silently
     } finally {
       setIsLoading(false);
       // Hide alert after 5 seconds
@@ -175,7 +132,7 @@ Looking forward to hearing from you!`;
                   <i className="bi bi-envelope-fill" style={{ color: '#ffc107', marginRight: '10px' }}></i>
                   Send Message
                 </h3>
-                <p className="form-subtitle">Professional email service - your message will be delivered directly to my inbox</p>
+                <p className="form-subtitle">Messages are delivered directly to my email inbox via secure email service</p>
               </div>
               
               {showAlert && (
@@ -183,7 +140,7 @@ Looking forward to hearing from you!`;
                   <div className="alert-content">
                     <i className={`bi ${alertType === 'success' ? 'bi-check-circle-fill' : 'bi-exclamation-triangle-fill'}`}></i>
                     <div>
-                      <strong>{alertType === 'success' ? 'Message sent!' : 'Error occurred!'}</strong>
+                      <strong>{alertType === 'success' ? 'Success!' : 'Error!'}</strong>
                       <p>
                         {alertMessage}
                       </p>

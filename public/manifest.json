@@ -1,0 +1,35 @@
+{
+  "short_name": "Art of Devil",
+  "name": "Art of Devil - Wedding Photography & Videography",
+  "description": "Professional wedding photographer and videographer portfolio showcasing cinematic wedding films and artistic photography",
+  "icons": [
+    {
+      "src": "images/dark-theme-logo.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "images/dark-theme-logo.jpg", 
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "images/dark-theme-logo.jpg",
+      "sizes": "144x144",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "images/dark-theme-logo.jpg",
+      "sizes": "72x72",
+      "type": "image/jpeg"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#ffc107",
+  "background_color": "#212529",
+  "categories": ["photography", "business", "entertainment"],
+  "lang": "en-US",
+  "scope": "/",
+  "orientation": "portrait-primary"
+}

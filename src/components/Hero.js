@@ -46,7 +46,7 @@ const Hero = () => {
               <div className="brand-logo-wrapper">
                 <img 
                   src="/images/light-theme-logo.png" 
-                  alt="Art of Devil Logo" 
+                  alt="Art of Devil - Video Editing Studio Logo" 
                   className="hero-brand-logo"
                   onError={(e) => {
                     e.target.style.display = 'none';
@@ -150,7 +150,7 @@ const Hero = () => {
               <div className="hero-image-frame">
                 <img 
                   src="/images/hero-image.jpg" 
-                  alt="Art of Devil - Professional Wedding Photographer and Videographer Portfolio" 
+                  alt="Art of Devil - Professional Video Editor and Motion Graphics Designer Portfolio" 
                   className="hero-main-image"
                   onError={(e) => {
                     e.target.style.display = 'none';

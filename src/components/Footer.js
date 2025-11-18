@@ -53,7 +53,7 @@ const Footer = () => {
               <div className="footer-logo-container">
                 <img 
                   src="/images/dark-theme-logo.jpg" 
-                  alt="Art of Devil Photography - Professional Wedding Photography Logo" 
+                  alt="Art of Devil - Video Editing Studio Logo" 
                   className="footer-logo-img"
                   onError={(e) => {
                     e.target.style.display = 'none';

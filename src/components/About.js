@@ -83,7 +83,7 @@ const About = () => {
               <div className="about-image-frame">
                 <img 
                   src="/images/about-image.jpg" 
-                  alt="Art of Devil - Professional Wedding Photographer - Behind the Camera" 
+                  alt="Art of Devil - Professional Video Editor and Motion Graphics Designer" 
                   className="about-image"
                 />
                 <div className="about-image-overlay">

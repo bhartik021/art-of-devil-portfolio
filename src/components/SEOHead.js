@@ -2,11 +2,11 @@ import React from 'react';
 import { Helmet } from 'react-helmet-async';
 
 const SEOHead = ({ 
-  title = "Art of Devil - Professional Wedding Photography & Videography",
-  description = "Professional wedding photographer and videographer specializing in cinematic wedding films, pre-wedding photography, and same-day edits. Capturing your love story with artistic vision.",
-  keywords = "wedding photographer, wedding videographer, pre-wedding photography, cinematic wedding videos, wedding highlights, same day edit, wedding portfolio, bridal photography, couple photography, destination wedding, wedding cinematography, professional photographer, video editor, creative wedding films",
+  title = "Vikas Kumar (Art of Devil) - Professional Video Editor & Motion Graphics Designer",
+  description = "Vikas Kumar (Art of Devil) - Expert video editor specializing in cinematic editing, color grading, motion graphics, and YouTube content creation. Transform your raw footage into compelling visual stories with professional post-production services.",
+  keywords = "Vikas Kumar, Art of Devil, video editor, motion graphics designer, cinematic editing, color grading, YouTube video editing, premiere pro editor, after effects designer, video post production, content creator editor, social media video editor, professional video editing services, video editing portfolio, freelance video editor, cinematic video production, video storytelling, Vikas Kumar video editor, Vikas Kumar motion graphics",
   image = "/images/hero-image.jpg",
-  url = "https://artofdevil.com",
+  url = "https://art-of-devil-portfolio.vercel.app",
   type = "website"
 }) => {
   return (
@@ -22,7 +22,7 @@ const SEOHead = ({
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
-      <meta property="og:site_name" content="Art of Devil Photography" />
+      <meta property="og:site_name" content="Art of Devil - Video Editing Studio" />
       
       {/* Twitter */}
       <meta property="twitter:card" content="summary_large_image" />
@@ -32,9 +32,9 @@ const SEOHead = ({
       <meta property="twitter:image" content={image} />
       
       {/* Additional SEO Meta Tags */}
-      <meta name="author" content="Art of Devil Photography" />
-      <meta name="publisher" content="Art of Devil Photography" />
-      <meta name="copyright" content="Art of Devil Photography" />
+      <meta name="author" content="Art of Devil - Video Editing Studio" />
+      <meta name="publisher" content="Art of Devil - Video Editing Studio" />
+      <meta name="copyright" content="Art of Devil - Video Editing Studio" />
       <meta name="robots" content="index, follow, max-image-preview:large" />
       <meta name="googlebot" content="index, follow" />
       

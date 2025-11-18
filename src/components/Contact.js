@@ -33,57 +33,42 @@ const Contact = () => {
     e.preventDefault();
     setIsLoading(true);
 
-    try {
-      // Using Formspree for reliable form submission
-      const response = await fetch('https://formspree.io/f/your-form-id', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
-          _replyto: formData.email,
-        }),
-      });
+    // Create professional email
+    const emailSubject = `Portfolio Inquiry: ${formData.subject}`;
+    const emailBody = `Hello,
 
-      if (response.ok) {
-        setAlertType('success');
-        setAlertMessage('Thank you! Your message has been sent successfully. I\'ll get back to you soon!');
-        setShowAlert(true);
-        
-        // Reset form
-        setFormData({ name: '', email: '', subject: '', message: '' });
-      } else {
-        throw new Error('Form submission failed');
-      }
-      
-    } catch (error) {
-      console.error('Form submission error:', error);
-      // Fallback to WhatsApp if form fails
-      const whatsappMessage = `Hi! I'm ${formData.name}.
+I'm interested in your video editing services.
 
-📧 Email: ${formData.email}
-📝 Subject: ${formData.subject}
+CONTACT DETAILS:
+Name: ${formData.name}
+Email: ${formData.email}
+Subject: ${formData.subject}
 
-Message:
+PROJECT DETAILS:
 ${formData.message}
 
-Looking forward to hearing from you!`;
+Please get back to me at your earliest convenience.
 
-      const whatsappUrl = `https://wa.me/${contactInfo.whatsapp.replace('+', '')}?text=${encodeURIComponent(whatsappMessage)}`;
-      window.open(whatsappUrl, '_blank');
-      
-      setAlertType('success');
-      setAlertMessage('Form service unavailable. Opening WhatsApp as backup - please send the message there!');
-      setShowAlert(true);
-    } finally {
-      setIsLoading(false);
-      // Hide alert after 5 seconds
-      setTimeout(() => setShowAlert(false), 5000);
-    }
+Best regards,
+${formData.name}`;
+
+    // Create mailto link
+    const mailtoLink = `mailto:${contactInfo.email}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+    
+    // Open email client
+    window.open(mailtoLink);
+
+    // Show success message
+    setAlertType('success');
+    setAlertMessage('Opening your email client with the message ready to send. Please click "Send" in your email app!');
+    setShowAlert(true);
+    
+    // Reset form
+    setFormData({ name: '', email: '', subject: '', message: '' });
+    setIsLoading(false);
+    
+    // Hide alert after 8 seconds (longer for email)
+    setTimeout(() => setShowAlert(false), 8000);
   };
 
   // Quick contact method
@@ -141,10 +126,10 @@ Looking forward to hearing from you!`;
             <div className="contact-form-container" data-aos="fade-right">
               <div className="form-header">
                 <h3 className="form-title">
-                  <i className="bi bi-chat-dots-fill" style={{ color: '', marginRight: '10px' }}></i>
-                  Send Message
+                  <i className="bi bi-envelope-fill" style={{ color: '#ffc107', marginRight: '10px' }}></i>
+                  Send Email Message
                 </h3>
-                <p className="form-subtitle">Fill out your details and I'll get back to you soon. WhatsApp backup available if needed!</p>
+                <p className="form-subtitle">Fill out the form and your email client will open with the message ready to send</p>
               </div>
               
               {showAlert && (
@@ -233,9 +218,9 @@ Looking forward to hearing from you!`;
                 </div>
                 <button type="submit" className="submit-btn contact-submit-btn" disabled={isLoading}>
                   <span className="btn-text">
-                    {isLoading ? 'Sending Message...' : 'Send Message'}
+                    {isLoading ? 'Opening Email...' : 'Send via Email'}
                   </span>
-                  <i className={`bi ${isLoading ? 'bi-hourglass-split' : 'bi-send-fill'} btn-icon`}></i>
+                  <i className={`bi ${isLoading ? 'bi-hourglass-split' : 'bi-envelope-fill'} btn-icon`}></i>
                   <div className="btn-glow"></div>
                 </button>
               </Form>
